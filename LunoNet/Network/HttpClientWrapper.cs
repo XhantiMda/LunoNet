@@ -40,18 +40,33 @@ namespace LunoNet.Network
         /// <returns>The async.</returns>
         /// <param name="url">URL.</param>
         /// <typeparam name="T">The 1st type parameter.</typeparam>
-        public async Task<T> GetAsync<T>(string url) where T : class
+        public async Task<ApiResponse<T>> GetAsync<T>(string url) where T : class
         {
-            var response = await _httpClient.GetAsync($"{_baseUrl}{url}");
+            var response = default(HttpResponseMessage);
 
-            var data = JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
-
-            if (data == null)
+            try 
             {
-                return null;
-            }
+                 response = await _httpClient.GetAsync($"{_baseUrl}{url}");
 
-            return data;
+                if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                    return new ApiResponse<T>((StatusCode)response.StatusCode);
+
+                var data = JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+
+                if (data == null)
+                {
+                    return null;
+                }
+
+                return new ApiResponse<T>((StatusCode)response.StatusCode, data);
+
+            }catch 
+            {
+                if (response != null)
+                    return new ApiResponse<T>((StatusCode)response.StatusCode);
+
+                return new ApiResponse<T>(StatusCode.BadGateway);
+            }
         }
 
         /// <summary>
@@ -60,20 +75,33 @@ namespace LunoNet.Network
         /// <returns>The async.</returns>
         /// <param name="url">URL.</param>
         /// <typeparam name="T">The 1st type parameter.</typeparam>
-        public async Task<T> PostAsync<T>(string url, string content) where T : class
+        public async Task<ApiResponse<T>> PostAsync<T>(string url, string content) where T : class
         {
-            var fullUrl = $"{_baseUrl}{url}";
+            var response = default(HttpResponseMessage);
 
-            var response = await _httpClient.PostAsync(fullUrl, new StringContent(content));
-
-            var data = JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
-
-            if (data == null)
+            try 
             {
-                return null;
-            }
+                response = await _httpClient.PostAsync($"{_baseUrl}{url}", new StringContent(content));
 
-            return data;
+                if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                    return new ApiResponse<T>((StatusCode)response.StatusCode);
+
+                var data = JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+
+                if (data == null)
+                {
+                    return null;
+                }
+
+                return new ApiResponse<T>((StatusCode)response.StatusCode, data);
+            }catch 
+            {
+                if (response != null)
+                    return new ApiResponse<T>((StatusCode)response.StatusCode);
+
+                return new ApiResponse<T>(StatusCode.BadGateway);
+            }
         }
+
     }
 }

@@ -2,6 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackOnBuild>true</PackOnBuild>
+    <Authors>Xhanati Mda</Authors>
+    <Owners>Xhanti Mda</Owners>
+    <PackageProjectUrl>https://github.com/XhantiMda/LunoNet</PackageProjectUrl>
+    <Summary>A LUNO api wrapper for .NET cleints.</Summary>
+    <Title>LunoNet</Title>
+    <Description>A LUNO api wrapper for .NET cleints.</Description>
   </PropertyGroup>
 
   <ItemGroup>

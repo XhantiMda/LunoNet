@@ -17,7 +17,7 @@ namespace LunoNet.Controllers
         /// </summary>
         /// <returns>The ticker for pair.</returns>
         /// <param name="pair">Pair.</param>
-        public async Task<Ticker> GetTickerForPair(string pair)
+        public async Task<ApiResponse<Ticker>> GetTickerForPair(string pair)
         {
             var urlString = $"ticker?pair={pair}";
 
@@ -29,7 +29,7 @@ namespace LunoNet.Controllers
         /// </summary>
         /// <returns>The all tickers for pair.</returns>
         /// <param name="pair">Pair.</param>
-        public async Task<Ticker[]> GetAllTickersForPairAsync(string pair)
+        public async Task<ApiResponse<Ticker[]>> GetAllTickersForPairAsync(string pair)
         {
             var urlString = $"ticker?pair={pair}";
 
@@ -44,7 +44,7 @@ namespace LunoNet.Controllers
         /// </summary>
         /// <returns>The orderbook for pair.</returns>
         /// <param name="pair">Pair.</param>
-        public async Task<Orderbook> GetOrderbookForPairAsync(string pair)
+        public async Task<ApiResponse<Orderbook>> GetOrderbookForPairAsync(string pair)
         {
             var urlString = $"orderbook?pair={pair}";
 
@@ -56,7 +56,7 @@ namespace LunoNet.Controllers
         /// </summary>
         /// <returns>The trades for pair async.</returns>
         /// <param name="pair">Pair.</param>
-        public async Task<Trade[]> GetTradesForPairAsync(string pair)
+        public async Task<ApiResponse<Trade[]>> GetTradesForPairAsync(string pair)
         {
             var urlString = $"trades?pair={pair}";
 
