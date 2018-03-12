@@ -15,8 +15,13 @@
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
     <Folder Include="Network\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="EnumTypes\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Controllers\Orders.cs" />
   </ItemGroup>
 </Project>

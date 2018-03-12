@@ -10,6 +10,7 @@
         Forbidden = 403,
         NotFound = 404,
         Confilct = 409,
+        LimitExceeded = 429,
         InternalServerError = 500,
         BadGateway = 501
     }
