@@ -3,7 +3,7 @@
     public class Orderbook
     {
         public long Timestamp { get; set; }
-        public Order[] Bids { get; set; }
-        public Order[] Asks { get; set; }
+        public MarketOrder[] Bids { get; set; }
+        public MarketOrder[] Asks { get; set; }
     }
 }
